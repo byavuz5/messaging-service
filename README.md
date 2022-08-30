@@ -2,6 +2,8 @@
 
 Proje örnek bir mesajlaşma uygulamasının servislerini içeriyor. Golang ile oluşturulmuş servislerin docker ile image haline getirilip, AWS Lambda üzerinde çalıştırılmasını sağlıyor. Projede veritabanı olarak DynamoDB kullanılmıştır.
 
+Canlı test etmek için aşağıdaki link'i kullanabilirsiniz.  
+* https://vnewvx5k1c.execute-api.eu-west-3.amazonaws.com/prod
 ***
 ## AWS CDK İçeriği
 
