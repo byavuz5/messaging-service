@@ -234,7 +234,7 @@ jobs:
       working-directory: services/getActivityLogs
 
 
-  aws_cdk:
+  cdk_deploy:
      runs-on: ubuntu-latest
      needs: [
         buildLogin,
@@ -244,8 +244,7 @@ jobs:
         buildSendMessage,
         buildGetSystemLogs,
         buildGetActivityLogs
-       ] 
-     if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
+       ]
      steps:
             
      - name: Checkout
