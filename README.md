@@ -1,4 +1,4 @@
-# Messaging API
+# Messaging Service
 
 Proje örnek bir mesajlaşma uygulamasının servislerini içeriyor. Golang ile oluşturulmuş servislerin docker ile image haline getirilip, AWS Lambda üzerinde çalıştırılmasını sağlıyor. Projede veritabanı olarak DynamoDB kullanılmıştır.
 
