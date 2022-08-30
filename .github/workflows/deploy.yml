@@ -1,4 +1,4 @@
-name: Deploy to ECR and CDK Deploy
+name: Build Images and CDK Deploy
 
 on:
   push:
@@ -110,7 +110,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       working-directory: services/getAllMessages
 
-
+  
   buildGetContactMessages:
     
     name: Build getContactMessages Service Image
@@ -141,7 +141,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       working-directory: services/getContactMessages
 
-
+  
   buildSendMessage:
     
     name: Build sendMessage Service Image
@@ -202,6 +202,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       working-directory: services/getSystemLogs
 
+  
   buildGetActivityLogs:
     
     name: Build getActivityLogs Service Image
@@ -235,16 +236,18 @@ jobs:
 
   aws_cdk:
      runs-on: ubuntu-latest
+     needs: [
+        buildLogin,
+        buildCreateAccount,
+        buildGetAllMessages,
+        buildGetContactMessages,
+        buildSendMessage,
+        buildGetSystemLogs,
+        buildGetActivityLogs
+       ] 
+     if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
      steps:
-     
-     - name: Wait for build to succeed
-       uses: fountainhead/action-wait-for-check@v1.0.0
-       id: wait-for-build
-       with:
-         token: ${{ secrets.GITHUB_TOKEN }}
-         checkName: Build getActivityLogs Service Image
-         ref: ${{ github.event.pull_request.head.sha || github.sha }}
-     
+            
      - name: Checkout
        uses: actions/checkout@v2
        
